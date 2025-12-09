@@ -12,22 +12,20 @@ export default function Template3() {
   const skills = (cvData?.skills || []).filter(e => e);
   const languages = (cvData?.languages || []).filter(e => e);
 
-// FIXED: load correct default set for selected template  
-const defaults = templateDefaults.template1;
+  const defaults = templateDefaults.template1;
 
-const defaultTitleColor = defaults.titleColor;
-const defaultHeaderColor = defaults.headerColor;
-const defaultBackgroundColor = defaults.backgroundColor;
-const defaultSideColor = defaults.sideColor;
-const defaultInputColor = defaults.inputColor;
-
+  const defaultTitleColor = defaults.titleColor;
+  const defaultHeaderColor = defaults.headerColor;
+  const defaultBackgroundColor = defaults.backgroundColor;
+  const defaultSideColor = defaults.sideColor;
+  const defaultInputColor = defaults.inputColor;
 
   return (
     <div className="flex h-full relative border border-1">
 
-      {/* HEADER — moved to TOP CENTER */}
+      {/* HEADER FIXED (removed Tailwind bg- class) */}
       <div
-        className="absolute bg-[#f4f2ee] top-8 left-1/2 -translate-x-1/2 h-40 w-[80%] shadow-sm flex flex-col justify-center items-center overflow-hidden"
+        className="absolute top-8 left-1/2 -translate-x-1/2 h-40 w-[80%] shadow-sm flex flex-col justify-center items-center overflow-hidden"
         style={{ backgroundColor: templateSettings.headerColor || defaultHeaderColor }}
       >
         <h2
@@ -44,11 +42,12 @@ const defaultInputColor = defaults.inputColor;
           {info.positionTitle || "Intitulé du poste"}
         </p>
 
-        {/* Centered Rectangle Photo */}
+        {/* Photo Top-Center */}
         {templateSettings.showPhoto && (
           <div
             id="picture"
-            className="bg-white rounded-md h-20 w-20 mt-3 border border-1 border-white overflow-hidden"
+            className="rounded-md h-20 w-20 mt-3 border border-1 overflow-hidden"
+            style={{ backgroundColor: "#FFFFFF" }}  // SAFE
           >
             <img
               className="h-20 w-20 object-cover bg-center"
@@ -59,13 +58,12 @@ const defaultInputColor = defaults.inputColor;
         )}
       </div>
 
-      {/* LEFT SIDE — MAIN CONTENT (same classes, same dimensions) */}
+      {/* LEFT SIDE (content area) */}
       <div
         id="left_side"
         className="w-3/5 pt-50 pl-10"
         style={{ backgroundColor: templateSettings.backgroundColor || defaultBackgroundColor }}
       >
-        {/* PROFILE */}
         <h3
           className="font-bold text-sm mb-2"
           style={{ color: templateSettings.titleColor || defaultTitleColor }}
@@ -97,7 +95,8 @@ const defaultInputColor = defaults.inputColor;
               <li key={i}>
                 <strong>{exp.role || "Poste"}</strong> — {exp.company || "Entreprise"}
                 <br />
-                <span className="text-gray-700 text-[10px]">
+                {/* FIXED: removed text-gray-700 */}
+                <span style={{ color: "#444", fontSize: "10px" }}>
                   {exp.from || "??"} - {exp.to || "??"}
                 </span>
                 <br />
@@ -128,9 +127,11 @@ const defaultInputColor = defaults.inputColor;
               <div key={i}>
                 <strong>{edu.degree || "Diplôme"}</strong> — {edu.school || "École"}
                 <br />
-                <span className="text-gray-700 text-[10px]">
+                {/* FIXED: removed text-gray-700 */}
+                <span style={{ color: "#444", fontSize: "10px" }}>
                   {edu.from || "??"} - {edu.to || "??"}
                 </span>
+                <br />
                 {edu.description && (
                   <p className="whitespace-pre-line mt-1">{edu.description}</p>
                 )}
@@ -142,13 +143,12 @@ const defaultInputColor = defaults.inputColor;
         )}
       </div>
 
-      {/* RIGHT SIDE — SIDEBAR (same classes & sizes) */}
+      {/* RIGHT SIDE */}
       <div
         id="right_side"
         className="w-2/5 p-8 pt-50"
         style={{ backgroundColor: templateSettings.sideColor || defaultSideColor }}
       >
-        {/* CONTACT */}
         <h3
           className="font-bold text-sm mb-3"
           style={{ color: templateSettings.titleColor || defaultTitleColor }}

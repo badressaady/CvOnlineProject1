@@ -12,7 +12,7 @@ import { templateDefaults } from "../utils/templateDefaults";
         }catch(err){ 
             console.err("Erreur parse LocalStorage",err);
             return defaultData;
-        }
+        } 
     });
             const [selectedTemplate, setSelectedTemplate] = useState(
         localStorage.getItem("selected-template") || "template1"

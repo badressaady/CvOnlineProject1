@@ -7,6 +7,10 @@ import Editor from "./pages/Editor";
 import Templates from "./pages/Templates";
 import NotFound from "./pages/NotFound";
 import Layouts from "./pages/Layouts";
+import FinalPreview from "./components/finalPreview";
+import PDF from "./utils/pdf";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +36,16 @@ export const router = createBrowserRouter([
         path: "/Layouts",
         element: <Layouts />
       },
+      {
+        path: "/finalPreview",
+        element: <FinalPreview />
+      },
+      {
+        path: "/pdf",
+        element: <PDF />
+      },
+
+
     ],
   },
 ]);

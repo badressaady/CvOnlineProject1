@@ -1,10 +1,10 @@
 export const templateDefaults = {
   template1: {
-    titleColor: "#1A237E",          // Deep blue for titles
-    inputColor: "#37474F",          // Cool grey-blue for text
-    backgroundColor: "#E3F2FD",     // Soft light blue background
-    headerColor: "#BBDEFB",         // Lighter blue header
-    sideColor: "#90CAF9",           // Medium pastel blue for sidebar
-    showPhoto: true
+    titleColor: "#3E3E40",        // Dark neutral gray — modern, clean, professional
+    inputColor: "#555557",        // Soft medium gray for high readability
+    backgroundColor: "#F4F2EE",   // Warm light beige/sand (matches your site)
+    headerColor: "#E3E1DC",       // Subtle warm gray-beige header block
+    sideColor: "#D5D3CF",         // Light gray-sand sidebar — very elegant
+    showPhoto: true,
   },
 };

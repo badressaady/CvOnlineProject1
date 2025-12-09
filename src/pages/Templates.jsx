@@ -1,127 +1,284 @@
-
 import Slider from "../utils/slider";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { useCv } from "../context/CvContext";
 import Template1 from "../components/templatesDesigns/template1";
 import Template2 from "../components/templatesDesigns/template2";
 import Template3 from "../components/templatesDesigns/template3";
-import { templateDefaults } from "../utils/templateDefaults";
-import { useEffect,useRef } from "react";
-import { BackgroundGradient } from "../components/ui/background-gradient";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import bgImage10 from "../assets/layouts/bgImage10.png";
 export default function Templates() {
-  useEffect(() => {
-    
-   }, []);
-  const {resetCv,resetTemplate,selectedTemplate}=useCv();
+  useEffect(() => {}, []);
+
+  const { resetCv, resetTemplate, selectedTemplate } = useCv();
   resetCv();
-  const {updateTemplate,templateSettings}=useCv();
-  
-  function randomColors(){
+
+  const { updateTemplate, templateSettings } = useCv();
+  const cvRef = useRef(null);
+
+  function randomColors() {
     updateTemplate({
-      backgroundColor:`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
-      inputColor:`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
-      headerColor:`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
-      sideColor:`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`,
-      titleColor:`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
-    }
-        
-    );
+      backgroundColor: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
+      inputColor: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
+      headerColor: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
+      sideColor: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
+      titleColor: `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`,
+    });
   }
-  function removePhoto(){
-    updateTemplate({
-      showPhoto:false
-    })
-  }function showPhoto(){
-    updateTemplate({
-      showPhoto:true
-    })
+
+  function removePhoto() {
+    updateTemplate({ showPhoto: false });
   }
-function resetDefault() {
- resetTemplate();
-}
-const cvRef = useRef(null);
+
+  function showPhoto() {
+    updateTemplate({ showPhoto: true });
+  }
+
+  function resetDefault() {
+    resetTemplate();
+  }
+
   function renderSelectedTemplate() {
     if (selectedTemplate === "template1") return <Template1 />;
     if (selectedTemplate === "template2") return <Template2 />;
     if (selectedTemplate === "template3") return <Template3 />;
     return (
-      <div className="text-center text-gray-500 p-6 border border-dashed border-gray-300 rounded-md">
-        Veuillez sélectionner un template pour prévisualiser votre CV.
+      <div className="flex h-full items-center justify-center text-gray-400">
+        Veuillez sélectionner un template
       </div>
     );
   }
 
-  return (  
-  <div  id="editContainer" className="flex relative  
-        gap-4
-        justify-center
-        max-[999px]:flex-col       
-        min-[1000px]:flex-row 
-        min-[1000px]:items-start
-        bg-[#FAF7F2] pb-10 
-        min-w-[600px]">
-    <div className=" w-full                  
-        max-[999px]:w-[700px]       
-        min-[1000px]:w-1/2       
-        flex-shrink-0            
-        min-w-[350px] ">
-          <BackgroundGradient>
-                  <div id="container" className="flex flex-col gap-10 mt-10 ml-10  p-10 overflow-hidden">
-        <div className="text-3xl font-bold mb-4"><p>Customize your Cv</p></div> 
+  const templateLabel =
+    selectedTemplate === "template1"
+      ? "Template 1 – Classique"
+      : selectedTemplate === "template2"
+      ? "Template 2 – Bandeau"
+      : selectedTemplate === "template3"
+      ? "Template 3 – Centré"
+      : "Aucun template sélectionné";
 
-          <div className="grid grid-cols-[1fr_200px_50px] gap-y-6 w-full">
-            <p>Choose a color for the Titles</p>
-            <input type="text" className="border w-full" placeholder="#00000" value={templateSettings.titleColor} onChange={(e)=>updateTemplate({titleColor:e.target.value})}/>
-            <input type="color" className="w-8 h-8" value={templateSettings.titleColor} onChange={(e)=>updateTemplate({titleColor:e.target.value})}/>
+  return (
+    <div 
+      style={{
+          backgroundImage: `url(${bgImage10})`,
+          backgroundSize: "100% auto",       // fills width without vertical stretch
+          imageRendering: "high-quality",
+          backgroundColor: "#f6eee8",
+        }}
+      id="editContainer"
+      className="min-h-screen w-full bg-gradient-to-br 
+        from-[#F7ECE7] via-[#FDF9F6] to-[#F2E2DD] 
+        px-4 py-8 flex justify-center 
+        bg-no-repeat bg-center 
+        "
+    >
+      <div className="w-full max-w-6xl flex flex-col gap-6 lg:flex-row">
 
-            <p>Choose a color for the inputs</p>
-            <input type="text" className="border w-full" placeholder="#00000" value={templateSettings.inputColor} onChange={(e)=>updateTemplate({inputColor:e.target.value})} />
-            <input type="color" className="w-8 h-8" value={templateSettings.inputColor} onChange={(e)=>updateTemplate({inputColor:e.target.value})} />
+        {/* ───────────────────────────────────────────────
+            LEFT PANEL — PERSONALISATION
+        ─────────────────────────────────────────────── */}
+        <motion.div
+          className="w-full lg:w-[40%] flex-shrink-0"
+          initial={{ x: -30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <div className="rounded-3xl bg-[#20101A]/70 backdrop-blur-sm text-white p-6 lg:p-8 flex flex-col gap-6 shadow-xl">
 
-            <p>Choose a color for the background</p>
-            <input type="text" className="border w-full" placeholder="#00000" value={templateSettings.backgroundColor} onChange={(e)=>updateTemplate({backgroundColor:e.target.value})} />
-            <input type="color" className="w-8 h-8" value={templateSettings.backgroundColor} onChange={(e)=>updateTemplate({backgroundColor:e.target.value})} />
+            {/* TEXT HEADER */}
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.2em] text-pink-200">
+                Étape 2
+              </p>
+              <h2 className="text-2xl lg:text-3xl font-semibold">
+                Personnaliser le design
+              </h2>
+              <p className="text-xs lg:text-sm text-pink-100/80 max-w-md">
+                Ajustez les couleurs, l’en-tête et la photo pour créer un CV professionnel.
+              </p>
+            </div>
 
-            <p>Choose a color for the HeaderLayout</p>
-            <input type="text" className="border w-full" placeholder="#00000" value={templateSettings.headerColor} onChange={(e)=>updateTemplate({headerColor:e.target.value})} />
-            <input type="color" className="w-8 h-8" value={templateSettings.headerColor} onChange={(e)=>updateTemplate({headerColor:e.target.value})} />
+            {/* COLOR FIELDS */}
+            <div className="mt-2 space-y-5">
 
-            <p>Choose a color for the side layout</p>
-            <input type="text" className="border w-full" placeholder="#00000" value={templateSettings.sideColor} onChange={(e)=>updateTemplate({sideColor:e.target.value})} />
-            <input type="color" className="w-8 h-8" value={templateSettings.sideColor} onChange={(e)=>updateTemplate({sideColor:e.target.value})}/>
+              {/* TITLE COLOR */}
+              <ColorField
+                label="Couleur des titres"
+                value={templateSettings.titleColor}
+                onChange={(v) => updateTemplate({ titleColor: v })}
+              />
+
+              {/* TEXT COLOR */}
+              <ColorField
+                label="Couleur du texte"
+                value={templateSettings.inputColor}
+                onChange={(v) => updateTemplate({ inputColor: v })}
+              />
+
+              {/* MAIN BACKGROUND */}
+              <ColorField
+                label="Arrière-plan principal"
+                value={templateSettings.backgroundColor}
+                onChange={(v) => updateTemplate({ backgroundColor: v })}
+              />
+
+              {/* HEADER COLOR */}
+              <ColorField
+                label="Bandeau d’en-tête"
+                value={templateSettings.headerColor}
+                onChange={(v) => updateTemplate({ headerColor: v })}
+              />
+
+              {/* SIDE COLOR */}
+              <ColorField
+                label="Colonne latérale"
+                value={templateSettings.sideColor}
+                onChange={(v) => updateTemplate({ sideColor: v })}
+              />
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <ButtonFull onClick={randomColors} text="Palette aléatoire" />
+
+              <ButtonOutline onClick={removePhoto} text="Masquer la photo" />
+              <ButtonOutline onClick={showPhoto} text="Afficher la photo" />
+
+              <ButtonStrong onClick={resetDefault} text="Réinitialiser" />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ───────────────────────────────────────────────
+            RIGHT SIDE — CV PREVIEW
+        ─────────────────────────────────────────────── */}
+        <motion.div
+          className="w-full lg:w-[60%] flex flex-col gap-4"
+          initial={{ x: 30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-[#4A2435]">
+                Aperçu du CV
+              </h3>
+              <p className="text-xs text-[#8B5C6C]">
+                Aperçu en temps réel des modifications.
+              </p>
+            </div>
+
+            <span className="rounded-full bg-white px-3 py-1 text-[11px] font-medium 
+              text-[#A33855] shadow-sm border border-[#F0CBD6]">
+              {templateLabel}
+            </span>
           </div>
 
+          {/* CV PREVIEW BOX — WITH ZOOM OUT */}
+          <motion.div
+            ref={cvRef}
+            id="cv-to-print"
+            className="relative bg-white rounded-3xl shadow-xl border border-[#F3D7E0] 
+              px-6 py-5 flex flex-col gap-4"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] text-[#C2889B]">
+              Aperçu en direct
+            </span>
 
-        <div className="w-full flex justify-between mt-6 p-4">
-          <button onClick={randomColors} className="rounded-4 border-1 p-4 hover:bg-pink-700 hover:text-white transition duration-300 ease-in-out cursor-pointer">Generate Random Colors</button>
-          <button onClick={removePhoto} className="rounded-4 border-1 p-4  hover:bg-pink-700 hover:text-white transition duration-300 ease-in-out cursor-pointer">Remove Photo</button>
-          <button onClick={showPhoto} className="rounded-4 border-1 p-4  hover:bg-pink-700 hover:text-white transition duration-300 ease-in-out cursor-pointer">Add Photo</button>
-          <button  className="rounded-4 border-1 p-4  hover:bg-pink-700 hover:text-white transition duration-300 ease-in-out cursor-pointer " onClick={resetDefault} >Reset Default</button>
-        </div>
-          
-      </div>
-          </BackgroundGradient>
-
-    </div>
-    <div id="customize-side" className="w-full
-        max-[999px]:w-full
-        min-[1000px]:w-1/2
-        flex-shrink-0
-        min-w-[350px]
-        mt-10">
-      <div 
-                  ref={cvRef} 
-                  id="cv-to-print" 
-                  style={{ width: '150mm', padding: '15mm' }} 
-                  className="mx-auto min-h-[800px] h-[800px] overflow-auto" 
+            {/* ZOOM OUT HERE */}
+            <div className="w-full h-[650px] overflow-auto flex justify-center bg-[#F5F1EE] rounded-2xl p-4">
+              <div
+                className="
+                  bg-white 
+                  w-[500px] h-[700px] 
+                  rounded-xl 
+                  overflow-hidden shadow-inner
+                  scale-[0.85]             /* 🔥 ZOOM OUT */
+                  origin-top
+                "
               >
-                  {renderSelectedTemplate()}
-              </div>  
+                {renderSelectedTemplate()}
+              </div>
+            </div>
+
+            {/* BUTTON UNDER CV */}
+            <div className="mt-4 flex justify-between items-center">
+              <p className="text-xs text-[#8B5C6C]">
+                Étape suivante : compléter votre CV.
+              </p>
+              <Link
+                to="/editor"
+                className="inline-flex items-center rounded-full bg-[#A33855] 
+                text-white text-xs font-medium px-5 py-2 shadow-md hover:bg-[#8E2744] transition"
+              >
+                Remplir mon CV
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
-    
-  </div>
-    
-   
-  
+  );
+}
+
+/* ░░ COMPONENTS ░░ */
+
+function ColorField({ label, value, onChange }) {
+  return (
+    <div className="grid grid-cols-[1.4fr_1.7fr_auto] items-center gap-3">
+      <p className="text-xs lg:text-sm text-pink-50">{label}</p>
+      <input
+        type="text"
+        className="w-full px-3 py-2 rounded-md bg-white/10 border border-white/30 
+        text-xs lg:text-sm placeholder-white/50 focus:outline-none"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <input
+        type="color"
+        className="w-9 h-9 rounded-md border border-white/40 cursor-pointer"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  );
+}
+
+function ButtonFull({ text, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="col-span-2 rounded-xl border border-pink-200/70 
+      bg-white/5 px-4 py-3 text-xs lg:text-sm font-medium 
+      hover:bg-white/15 hover:text-pink-100 transition"
+    >
+      {text}
+    </button>
+  );
+}
+
+function ButtonOutline({ text, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="rounded-xl border border-pink-200/60 px-3 py-3 
+      text-xs lg:text-sm font-medium hover:bg-white/10 transition"
+    >
+      {text}
+    </button>
+  );
+}
+
+function ButtonStrong({ text, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="col-span-2 rounded-xl bg-white text-[#A33855] 
+      px-4 py-3 text-xs lg:text-sm font-semibold hover:bg-white/90 transition"
+    >
+      {text}
+    </button>
   );
 }

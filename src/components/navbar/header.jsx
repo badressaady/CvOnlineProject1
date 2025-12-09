@@ -13,7 +13,7 @@ export const Header = () => {
   const activeLinkStyle = "font-bold border-b-2 border-pink-700 text-pink-700";
 
   return (
-    <header className="bg-[#FAF7F2] shadow-md sticky top-0 z-50">
+    <header className="bg-[#F5EFE6] shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-1">
         
         
