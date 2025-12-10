@@ -79,10 +79,10 @@ export default function Editor() {
                 {renderSelectedTemplate()}
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 w-full mt-3 px-5 py-3 bg-[#C25569] border border-[#E6D5C4] text-white text-center rounded-xl hover:bg-[#efe2d0] transition shadow-sm">
                 <Link
                   to="/finalPreview"
-                  className="w-full px-5 py-3 bg-[#C25569] hover:bg-[#a84557] text-white rounded-xl font-semibold shadow-md transition"
+                 
                 >
                   Download your Cv
                 </Link>
