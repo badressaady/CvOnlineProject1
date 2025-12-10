@@ -10,11 +10,9 @@ import { motion } from "framer-motion";
 export default function FinalPreview() {
   const { selectedTemplate, cvData, templateSettings } = useCv();
 
-  return (
+  return ( 
     <div
-      className="min-h-screen w-full flex flex-col items-center px-6 py-16 
-                 bg-gradient-to-b from-[#F7ECE2] to-[#F2DED0]
-                 bg-no-repeat bg-center "
+      className="min-h-screen w-full flex flex-col items-center px-6 py-16 "
                        style={{
                          backgroundImage: `url(${bgImage10})`,
                          backgroundSize: "100% auto",
@@ -22,8 +20,6 @@ export default function FinalPreview() {
                          backgroundColor: "#f6eee8",
                        }}
     >
-
-      {/* HEADER SECTION */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -34,8 +30,7 @@ export default function FinalPreview() {
         Your Final CV
       </motion.h1>
 
-      {/* CARD WRAPPER */}
-{/* CARD WRAPPER (Scaled CV) */}
+
 <motion.div
   initial={{ opacity: 0, scale: 0.97 }}
   animate={{ opacity: 1, scale: 1 }}
@@ -48,45 +43,27 @@ export default function FinalPreview() {
   style={{
     width: "100%",
     maxWidth: "900px",
-    height: "85vh",          // CV fully visible
+    height: "85vh",          
     minHeight: "85vh",
     overflow: "hidden",
     boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
   }}
 >
-  {/* SCALE WRAPPER — ONLY new addition */}
+  
   <div
     style={{
-      transform: "scale(0.78)",     // CV smaller
+      transform: "scale(0.78)",     
       transformOrigin: "top center",
       width: "210mm",
       minHeight: "297mm",
-      height: "100%",               // full height of container
+      height: "100%",               
     }}
   >
-    {/* Decorative top accent stays the same */}
-    <div
-      className="absolute top-0 left-0 w-full h-3 rounded-t-2xl"
-      style={{
-        background:
-          "linear-gradient(90deg, #C25569, #d77a89, #C25569)",
-      }}
-    />
-
-    {/* LIVE TEMPLATE */}
     {selectedTemplate === "template1" && <Template1 />}
     {selectedTemplate === "template2" && <Template2 />}
     {selectedTemplate === "template3" && <Template3 />}
   </div>
 </motion.div>
-
-
-      {/* DOWNLOAD BUTTON */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
         <PDFDownloadLink
           document={<CVDocument cvData={cvData} templateSettings={templateSettings} />}
           fileName="cv.pdf"
@@ -114,8 +91,7 @@ export default function FinalPreview() {
               </button>
             )
           }
-        </PDFDownloadLink>
-      </motion.div>
+        </PDFDownloadLink>   
     </div>
   );
 }

@@ -1,36 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
+//les formulaires
 import { ExperienceForm } from "../components/form/experienceForm";
 import { PersonalInfoForm } from "../components/form/PersonalInfoForm";
 import { SummaryForm } from "../components/form/summaryForm";
 import { LanguagesForm } from "../components/form/languagesForm";
 import { SkillsForm } from "../components/form/skillsForm";
 import { EducationForm } from "../components/form/educationForm";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import CVDocument from "../components/CDDocument";
-import html2pdf from "html2pdf.js";
+
+
 import { Link } from "react-router-dom";
+//les templates
 import Template1 from "../components/templatesDesigns/template1";
 import Template2 from "../components/templatesDesigns/template2";
 import Template3 from "../components/templatesDesigns/template3";
 import { useCv } from "../context/CvContext";
 import bgImage10 from "../assets/layouts/bgImage10.png";
-import { motion } from "framer-motion";   // <-- ADDED
+import { motion } from "framer-motion";   
 
 export default function Editor() {
-  const { selectedTemplate, cvData, resetCv, templateSettings } = useCv();
-  const cvRef = useRef(null);
-
-  const downloadPDF = () => {
-    const element = cvRef.current;
-    const options = {
-      margin: 0,
-      filename: "mon_cv.pdf",
-      image: { type: "jpeg", quality: 1 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm",      format: "a4", orientation: "portrait" },
-    };
-    html2pdf().set(options).from(element).save();
-  };
+  const { selectedTemplate,  resetCv } = useCv();
 
   function renderSelectedTemplate() {
     if (selectedTemplate === "template1") return <Template1 />;
@@ -46,21 +34,19 @@ export default function Editor() {
 
   return (
     <main
-      className="min-h-screen w-full bg-[#FAF6F2] bg-no-repeat bg-center"
+      className="min-h-screen w-full bg-[#FAF6F2] bg-no-repeat bg-center" 
       style={{
-        backgroundImage: `url(${bgImage10})`,
-        backgroundSize: "100% auto",
+        backgroundImage:`url(${bgImage10})`,
+        backgroundSize: "100%", 
         imageRendering: "high-quality",
-        backgroundColor: "#f6eee8",
       }}
     >
-      <div className="max-w-7xl mx-auto px-8 pt-4 pb-8">
-
+      <div className="max-w-7xl mx-auto px-8 pt-4 pb-8"> 
         <div className="flex flex-col md:flex-row gap-8 mt-[-10px]">
 
-          {/* LEFT FORM SECTION — WITH SLIDE ANIMATION */}
+          {/*FORM SECTION */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -40 }} //l'animation commence du gauche , l'opacity au debut est invisible
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full md:w-1/2 bg-white p-6 rounded-2xl shadow-lg border border-[#E6D5C4] max-h-[85vh] overflow-auto space-y-6"
@@ -71,9 +57,9 @@ export default function Editor() {
             <EducationForm />
             <ExperienceForm />
             <SummaryForm />
-          </motion.div>
+            </motion.div>
 
-          {/* RIGHT PREVIEW SECTION — WITH SLIDE ANIMATION */}
+          {/* RIGHT PREVIEW SECTION*/}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -83,21 +69,16 @@ export default function Editor() {
             <div
               className="
                 sticky top-10 bg-white p-6 rounded-2xl shadow-lg 
-                border border-[#E6D5C4] max-h-[85vh] overflow-auto space-y-4
+                border border-[#E6D5C4] max-h-[900px] overflow-auto space-y-4
               "
             >
-
-              {/* LIVE PREVIEW */}
               <div
-                ref={cvRef}
-                id="cv-to-print"
                 style={{ width: "150mm", padding: "15mm" }}
-                className="mx-auto bg-white min-h-[600px] shadow-inner rounded-xl border border-[#E6D5C4]"
+                className="mx-auto bg-white min-h-[600px] rounded-xl border border-[#E6D5C4]"
               >
                 {renderSelectedTemplate()}
               </div>
 
-              {/* PDF DOWNLOAD BUTTON */}
               <div className="mt-4">
                 <Link
                   to="/finalPreview"
@@ -105,9 +86,7 @@ export default function Editor() {
                 >
                   Download your Cv
                 </Link>
-              </div>
-
-              {/* RESET BUTTON */}
+              </div>  
               <button
                 onClick={resetCv}
                 className="w-full mt-3 px-5 py-3 bg-[#f7f2ec] border border-[#E6D5C4] text-gray-700 rounded-xl hover:bg-[#efe2d0] transition shadow-sm"

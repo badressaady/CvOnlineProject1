@@ -9,16 +9,15 @@ export default function Slider() {
   const navigate = useNavigate();
   const { setSelectedTemplate } = useCv();
 
-  // NEW: slides array compatible with your Carousel
   const slides = [
     {
-      id: "template1",
+      id: "template1", 
       title: "Template 1",
       button: "Choose Template 1",
       component: <Template1 />,
-      onClick: () => {choose("template1")},
+      onClick: () => choose("template1"),  
     },
-    {
+    { 
       id: "template2",
       title: "Template 2",
       button: "Choose Template 2",
@@ -38,14 +37,14 @@ export default function Slider() {
     setSelectedTemplate(templateId);
     navigate("/templates");
   }
-
-  // Convert slides for Carousel format
+ 
+  
   const formattedSlides = slides.map((s) => ({
     title: s.title,
     button: s.button,
-    src: "",       // not used, but required by Carousel
+    src: "",       
     onClick: s.onClick,
-    component: s.component,  // we inject the template component here
+    component: s.component,  
   }));
 
   return (

@@ -22,16 +22,14 @@ export default function CVDocument({ cvData, templateSettings }) {
     backgroundColor: templateSettings.backgroundColor || "#F7F3EE",
     sideColor: templateSettings.sideColor || "#EAD1D1",
     inputColor: templateSettings.inputColor || "#2E2E2E",
-  };
+  }; 
 
-  const styles = StyleSheet.create({
+  const styles = StyleSheet.create({   //StyleSheet.create() est utilise dans @react-pdf/renderer , il permet de creer des styles optimises
     page: {
       flexDirection: "row",
       backgroundColor: defaults.backgroundColor,
       fontFamily: "Helvetica",
     },
-
-    // LEFT SIDEBAR
     leftSide: {
       width: "38%",
       backgroundColor: defaults.sideColor,
@@ -39,8 +37,6 @@ export default function CVDocument({ cvData, templateSettings }) {
       paddingLeft: 30,
       paddingRight: 20,
     },
-
-    // TOP HEADER BLOCK (right side)
     headerBlock: {
       position: "absolute",
       top: 60,
@@ -63,8 +59,6 @@ export default function CVDocument({ cvData, templateSettings }) {
       color: defaults.titleColor,
       marginTop: 4,
     },
-
-    // FIXED PHOTO POSITION — inside the sidebar
     photoWrapper: {
       position: "absolute",
       top: 40,
@@ -84,7 +78,6 @@ export default function CVDocument({ cvData, templateSettings }) {
       objectFit: "cover",
     },
 
-    // RIGHT CONTENT
     rightSide: {
       width: "62%",
       paddingTop: 200,
@@ -116,16 +109,13 @@ export default function CVDocument({ cvData, templateSettings }) {
 
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
-
-        {/* PHOTO — FIXED POSITION + RELIABLE BASE64 */}
+      <Page size="A4" style={styles.page}> 
         {templateSettings.showPhoto && info.profileImage ? (
           <View style={styles.photoWrapper}>
             <Image src={info.profileImage} style={styles.photo} />
           </View>
         ) : null}
 
-        {/* SIDEBAR */}
         <View style={styles.leftSide}>
           <Text style={styles.sectionTitle}>CONTACT</Text>
           <Text style={styles.text}>Email: {info.email || "—"}</Text>
@@ -153,7 +143,6 @@ export default function CVDocument({ cvData, templateSettings }) {
           )}
         </View>
 
-        {/* HEADER BLOCK */}
         <View style={styles.headerBlock}>
           <Text style={styles.name}>
             {(info.firstName || "Prénom")} {(info.lastName || "Nom")}
@@ -163,7 +152,6 @@ export default function CVDocument({ cvData, templateSettings }) {
           </Text>
         </View>
 
-        {/* RIGHT SECTION */}
         <View style={styles.rightSide}>
           <Text style={styles.sectionTitle}>PROFIL PROFESSIONEL</Text>
           <Text style={styles.text}>{summary || "Votre résumé apparaîtra ici."}</Text>

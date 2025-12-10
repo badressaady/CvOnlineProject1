@@ -62,7 +62,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
           transformOrigin: "bottom",
         }}
       >
-        {/* FIXED: Replace background IMAGE with TEMPLATE COMPONENT */}
+        
         <div
           className="absolute top-0 left-0 w-full h-full bg-white rounded-[1%] overflow-hidden transition-all duration-150 ease-out shadow-xl"
           style={{

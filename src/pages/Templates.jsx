@@ -1,5 +1,4 @@
-import Slider from "../utils/slider";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+
 import { useCv } from "../context/CvContext";
 import Template1 from "../components/templatesDesigns/template1";
 import Template2 from "../components/templatesDesigns/template2";
@@ -8,13 +7,10 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import bgImage10 from "../assets/layouts/bgImage10.png";
-export default function Templates() {
-  useEffect(() => {}, []);
-
-  const { resetCv, resetTemplate, selectedTemplate } = useCv();
+export default function Templates() {  
+  const { resetCv, resetTemplate, selectedTemplate,updateTemplate, templateSettings } = useCv();
   resetCv();
 
-  const { updateTemplate, templateSettings } = useCv();
   const cvRef = useRef(null);
 
   function randomColors() {
@@ -50,20 +46,11 @@ export default function Templates() {
     );
   }
 
-  const templateLabel =
-    selectedTemplate === "template1"
-      ? "Template 1 – Classique"
-      : selectedTemplate === "template2"
-      ? "Template 2 – Bandeau"
-      : selectedTemplate === "template3"
-      ? "Template 3 – Centré"
-      : "Aucun template sélectionné";
-
   return (
     <div 
       style={{
           backgroundImage: `url(${bgImage10})`,
-          backgroundSize: "100% auto",       // fills width without vertical stretch
+          backgroundSize: "100%",      
           imageRendering: "high-quality",
           backgroundColor: "#f6eee8",
         }}
@@ -75,10 +62,7 @@ export default function Templates() {
         "
     >
       <div className="w-full max-w-6xl flex flex-col gap-6 lg:flex-row">
-
-        {/* ───────────────────────────────────────────────
-            LEFT PANEL — PERSONALISATION
-        ─────────────────────────────────────────────── */}
+        {/*LEFT SIDE */}
         <motion.div
           className="w-full lg:w-[40%] flex-shrink-0"
           initial={{ x: -30, opacity: 0 }}
@@ -86,52 +70,44 @@ export default function Templates() {
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <div className="rounded-3xl bg-[#20101A]/70 backdrop-blur-sm text-white p-6 lg:p-8 flex flex-col gap-6 shadow-xl">
-
-            {/* TEXT HEADER */}
             <div className="space-y-2">
-              <p className="text-xs uppercase tracking-[0.2em] text-pink-200">
-                Étape 2
+              <p className="text-xs tracking-[0.2em] text-pink-200"> {/*tracking : spacing between letters */}
+                ÉTAPE 2
               </p>
               <h2 className="text-2xl lg:text-3xl font-semibold">
                 Personnaliser le design
               </h2>
-              <p className="text-xs lg:text-sm text-pink-100/80 max-w-md">
+              <p className="text-xs lg:text-sm text-pink-100/80 max-w-md">  {/*/80 : Opacity */}
                 Ajustez les couleurs, l’en-tête et la photo pour créer un CV professionnel.
               </p>
             </div>
 
-            {/* COLOR FIELDS */}
             <div className="mt-2 space-y-5">
 
-              {/* TITLE COLOR */}
               <ColorField
                 label="Couleur des titres"
-                value={templateSettings.titleColor}
+                value={templateSettings.titleColor} 
                 onChange={(v) => updateTemplate({ titleColor: v })}
               />
 
-              {/* TEXT COLOR */}
               <ColorField
                 label="Couleur du texte"
                 value={templateSettings.inputColor}
                 onChange={(v) => updateTemplate({ inputColor: v })}
               />
 
-              {/* MAIN BACKGROUND */}
               <ColorField
                 label="Arrière-plan principal"
                 value={templateSettings.backgroundColor}
                 onChange={(v) => updateTemplate({ backgroundColor: v })}
               />
 
-              {/* HEADER COLOR */}
               <ColorField
                 label="Bandeau d’en-tête"
                 value={templateSettings.headerColor}
                 onChange={(v) => updateTemplate({ headerColor: v })}
               />
 
-              {/* SIDE COLOR */}
               <ColorField
                 label="Colonne latérale"
                 value={templateSettings.sideColor}
@@ -139,7 +115,6 @@ export default function Templates() {
               />
             </div>
 
-            {/* ACTION BUTTONS */}
             <div className="mt-4 grid grid-cols-2 gap-3">
               <ButtonFull onClick={randomColors} text="Palette aléatoire" />
 
@@ -150,36 +125,15 @@ export default function Templates() {
             </div>
           </div>
         </motion.div>
-
-        {/* ───────────────────────────────────────────────
-            RIGHT SIDE — CV PREVIEW
-        ─────────────────────────────────────────────── */}
+        
+        {/*RIGHT SIDE  */}
         <motion.div
           className="w-full lg:w-[60%] flex flex-col gap-4"
           initial={{ x: 30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-[#4A2435]">
-                Aperçu du CV
-              </h3>
-              <p className="text-xs text-[#8B5C6C]">
-                Aperçu en temps réel des modifications.
-              </p>
-            </div>
-
-            <span className="rounded-full bg-white px-3 py-1 text-[11px] font-medium 
-              text-[#A33855] shadow-sm border border-[#F0CBD6]">
-              {templateLabel}
-            </span>
-          </div>
-
-          {/* CV PREVIEW BOX — WITH ZOOM OUT */}
+        >        
           <motion.div
-            ref={cvRef}
-            id="cv-to-print"
             className="relative bg-white rounded-3xl shadow-xl border border-[#F3D7E0] 
               px-6 py-5 flex flex-col gap-4"
           >
@@ -195,18 +149,17 @@ export default function Templates() {
                   w-[500px] h-[700px] 
                   rounded-xl 
                   overflow-hidden shadow-inner
-                  scale-[0.85]             /* 🔥 ZOOM OUT */
-                  origin-top
+                  scale-[0.85]             
+                  origin-top  //transformation commence du haut 
                 "
               >
                 {renderSelectedTemplate()}
               </div>
             </div>
 
-            {/* BUTTON UNDER CV */}
             <div className="mt-4 flex justify-between items-center">
               <p className="text-xs text-[#8B5C6C]">
-                Étape suivante : compléter votre CV.
+                Étape suivante : compléter votre CV. 
               </p>
               <Link
                 to="/editor"
@@ -222,9 +175,7 @@ export default function Templates() {
     </div>
   );
 }
-
-/* ░░ COMPONENTS ░░ */
-
+//les components utilisees
 function ColorField({ label, value, onChange }) {
   return (
     <div className="grid grid-cols-[1.4fr_1.7fr_auto] items-center gap-3">
@@ -250,7 +201,7 @@ function ButtonFull({ text, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="col-span-2 rounded-xl border border-pink-200/70 
+      className="col-span-2 rounded-xl border border-pink-200/70    //col-span-2 : c-a-d cet element prend deux colonnes du grid
       bg-white/5 px-4 py-3 text-xs lg:text-sm font-medium 
       hover:bg-white/15 hover:text-pink-100 transition"
     >

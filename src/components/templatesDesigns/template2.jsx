@@ -13,7 +13,6 @@ export default function Template2() {
   const skills = (cvData?.skills || []).filter(e => e);
   const languages = (cvData?.languages || []).filter(e => e);
 
-  // FIX: Load correct colors
   const defaults = templateDefaults.template1;
 
   const defaultTitleColor = defaults.titleColor;
@@ -25,7 +24,7 @@ export default function Template2() {
   return (
     <div className="flex h-full relative border border-1">
 
-      {/* HEADER — FIXED (removing Tailwind bg- classes) */}
+      
       <div
         className="absolute top-0 left-0 right-0 h-36 shadow-sm flex flex-col justify-center pl-20 pr-40"
         style={{
