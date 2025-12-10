@@ -106,6 +106,16 @@ export default function CVDocument({ cvData, templateSettings }) {
       marginBottom: 6,
     },
   });
+  const toBase64 = async (url) => {
+  const res = await fetch(url);
+  const blob = await res.blob();
+
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+};
 
   return (
     <Document>

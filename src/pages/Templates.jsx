@@ -69,7 +69,7 @@ export default function Templates() {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <div className="rounded-3xl bg-[#20101A]/70 backdrop-blur-sm text-white p-6 lg:p-8 flex flex-col gap-6 shadow-xl">
+          <div className="rounded-3xl bg-[#20101A]/70 backdrop-blur-sm text-white p-6 lg:p-8 flex flex-col gap-6 shadow-xl scale-90">
             <div className="space-y-2">
               <p className="text-xs tracking-[0.2em] text-pink-200"> {/*tracking : spacing between letters */}
                 ÉTAPE 2
@@ -128,14 +128,14 @@ export default function Templates() {
         
         {/*RIGHT SIDE  */}
         <motion.div
-          className="w-full lg:w-[60%] flex flex-col gap-4"
+          className="w-full lg:w-[60%] flex flex-col gap-4 "
           initial={{ x: 30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >        
           <motion.div
             className="relative bg-white rounded-3xl shadow-xl border border-[#F3D7E0] 
-              px-6 py-5 flex flex-col gap-4"
+              px-6 py-5 flex flex-col gap-4 scale-90"
           >
             <span className="text-xs uppercase tracking-[0.2em] text-[#C2889B]">
               Aperçu en direct
