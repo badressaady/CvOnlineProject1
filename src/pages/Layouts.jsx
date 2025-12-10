@@ -33,6 +33,6 @@ export default function Layouts() {
       >
         <Slider />
       </motion.div>
-    </div>
+</div>
   );
 }
