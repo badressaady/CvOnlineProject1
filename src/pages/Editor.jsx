@@ -52,6 +52,7 @@ export default function Editor() {
             className="w-full md:w-1/2 bg-white p-6 rounded-2xl shadow-lg border border-[#E6D5C4] max-h-[900px] overflow-auto space-y-6"
           >
             <PersonalInfoForm />
+            <SummaryForm />
             <LanguagesForm />
             <SkillsForm />
             <EducationForm />
