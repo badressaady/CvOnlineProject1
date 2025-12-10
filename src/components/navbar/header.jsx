@@ -38,7 +38,8 @@ export const Header = () => {
           {[
             { label: "Accueil", to: "/" },
             { label: "Éditeur", to: "/editor" },
-            { label: "Templates", to: "/templates" },
+            { label: "Templates", to: "/Layouts" },
+            { label: "Customize", to: "/templates" },
             
           ].map((item) => (
             <NavLink

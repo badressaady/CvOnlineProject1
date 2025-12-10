@@ -25,14 +25,14 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex justify-center md:justify-start gap-4">
               <Link
-                to="/editor"
+                to="/Layouts"
                 className="inline-block text-white px-6 md:px-8 py-3 rounded-lg text-base md:text-lg font-semibold shadow bg-gradient-to-r from-pink-700 to-pink-300 hover:from-pink-800 hover:to-pink-400 
               transition ease-in-out duration-300"
               >
                 Créer mon CV — Gratuit
               </Link>
               <Link
-                to="/Layouts"
+                to="/editor"
                 className="inline-block border border-gray-300 text-gray-800 px-6 md:px-8 py-3 rounded-lg text-base md:text-lg hover:bg-gray-50 transition"
               >
                 Customize your Cv
@@ -109,7 +109,7 @@ function StepCard({ number, title, content, visualContent }) {
 
       {/* Colonne du Contenu Visuel (La carte blanche) */}
       <div className="flex justify-center lg:justify-start">
-        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100 transform hover:scale-[1.02] transition duration-500 ease-in-out">
           {visualContent}
         </div>
       </div>

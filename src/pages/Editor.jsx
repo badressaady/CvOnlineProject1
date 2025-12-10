@@ -49,7 +49,7 @@ export default function Editor() {
             initial={{ opacity: 0, x: -40 }} //l'animation commence du gauche , l'opacity au debut est invisible
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full md:w-1/2 bg-white p-6 rounded-2xl shadow-lg border border-[#E6D5C4] max-h-[85vh] overflow-auto space-y-6"
+            className="w-full md:w-1/2 bg-white p-6 rounded-2xl shadow-lg border border-[#E6D5C4] max-h-[900px] overflow-auto space-y-6"
           >
             <PersonalInfoForm />
             <LanguagesForm />
@@ -82,7 +82,7 @@ export default function Editor() {
               <div className="mt-4">
                 <Link
                   to="/finalPreview"
-                  className="w-full px-5 py-3 bg-[#C25569] hover:bg-[#a84557] text-white rounded-xl font-semibold shadow-md transition"
+                  className="w-full mt-1 px-5 py-3 bg-[#C25569] hover:bg-[#a84557] text-white rounded-xl font-semibold shadow-md transition"
                 >
                   Download your Cv
                 </Link>

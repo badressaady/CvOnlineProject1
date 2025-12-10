@@ -33,6 +33,11 @@ export function Footer() {
               </li>
               <li>
                 <a href="/templates" className="hover:text-pink-500 transition">
+                  Customize
+                </a>
+              </li>
+              <li>
+                <a href="/Layouts" className="hover:text-pink-500 transition">
                   Templates
                 </a>
               </li>
